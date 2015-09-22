@@ -26,11 +26,12 @@ In case you have make installed on your system you can now just type:
 make
 ```
 
-Er zal nu een nieuwe map verschijnen genaamd "helpFiles". De samenvatting zelf verschijnen als "Summary.pdf" in de root folder van het project.
+a new folder called "helpFiles" will appear. The summary itself will appear too in the root folder of the project and is named "Summary.pdf".
 
-Indien je make niet hebt, kan je texlive rechtstreeks aanroepen. Volgend commando zal dan je samenvatting creëren:
+In case you don't have make installed, you can call texlive directly from the commandline. Following command will create the summary:
+
 ``` bash
 pdflatex -jobname Summary.pdf main.tex
 ```
 
-Dit commando zal je tweemaal moeten uitvoeren om alle referenties binnen het document juist te krijgen.
+Execute this command twice to make sure all references in the summary are displayed correctly.
