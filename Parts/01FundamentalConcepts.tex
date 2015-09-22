@@ -1,0 +1,95 @@
+\section{Fundamental Concepts}
+
+\subsection{Applications of Database Technology}
+Data is everywhere these days, in different formats and sizes. All of them have to be stored one way or another.
+\begin{itemize}
+  \item numeric and alphanumeric data
+  \item multimedia data (pictures, audio, video's,\dots)
+  \item biometric data
+  \item gegraphical data
+  \item volatile data (high frequency trading software)
+  \item web content (XML, HTML, PDF, \dots)
+  \item storing large datasets for analytics
+\end{itemize}
+
+\subsection{Definitions}
+\begin{description}
+  \item[Database] collection of related data, within a specific setting and with a target group of users and applications.
+  \item[DBMS] a software package that allows to define, store, use and maintain a DB. It is often modular.
+  \item[Database System] a combination of a DB and DBMS.
+\end{description}
+
+\subsection{File Vs Database Approach to Data Management}
+It used to be so that different applications saved their data in their own, separate files. This was bad for numerous reasons:
+\begin{itemize}
+  \item waste of disk space because of redundant storage of data.
+  \item the redundant data could lead to inconsistencies.
+  \item there was a strong dependancy between applications and the data. A change in how the data was stored in the file, or the data definitions would would lead to the application having to change too.
+  \item concurrency control is hard.
+  \item it is difficult to integrate different applications.
+\end{itemize}
+
+DB technology solves this. The DBMS stores the data centrally and acts as an interface to the data for the applications. This centrally stored data can be accessed with SQL, which further eases access to the data. There's no more need to work with files in your code.
+
+Also the data definitions are stored in the DBMS and no longer defined in every single application.
+
+\todo[inline]{Add table from slides}
+
+\subsection{Elements of a Database System}
+\subsubsection{Data Model}
+Definition: a clear description of the data concepts, their relationships and various data constraints that together make up the content of the database. There are various types of data models:
+\begin{itemize}
+  \item Conceptual: high-level description of data concepts and relationships. Used for communication between DB designer and business users. $\Rightarrow$ conceptual models are implementation-independant and close to how the business user perceives the data. Examples of a conceptual model are EER's and object-oriented models.
+  \item Logical: mapping of the conceptual model to a specific implementation(network, relational, hiërarchical, \dots)
+  \item Physical: describes how the data is physically stored.
+\end{itemize}
+
+\subsubsection{Schemas and Instances}
+In data models it is important to distinguish between the description of the data and the actual data itself. This difference is expressed in two concepts:
+\begin{description}
+  \item[DB Scheme] description of data, specified during DB design and stored in the catalog.
+  \item[DB State] how the data looks like at a given moment in time.
+\end{description}
+
+\subsubsection{The Three-Scheme Architecture}
+This architecture is an essential element of any DB environment.
+\todo[inline]{add figure from slides}
+
+In the middle we find the conceptual scheme, which focuses on DB concepts like relationships and constraints, regardless of implementation. It's later mapped to the logical/internal schema. \todo{is logical shema = internal schema?}
+
+The top level has the external views. These views are tailored to the needs of a certain application or user that uses (part of) the data in the DB.
+
+So in essence, the three schema's are: external, conceptual and internal. Ideally, a change in any of those does not impact the other layers.
+
+\subsubsection{Data Dictionary (Catalog)}
+The catalog is the heart of a DBMS. It is where all the data definitions(metadata) are stored. It stores definitions from all three layers in the three-scheme architecture and keeps them synchronised. This way they're always consistent.
+
+\subsubsection{Database Users}
+\begin{description}
+  \item[DB Designer] designs conceptual and logical schema.
+  \item[DB Administrator (DBA)] designs external and physical schema.
+  \item[Application Developer] uses the DB and its data to create software.
+  \item[Business User] uses applications to access the data.
+  \item[DBMS Vendors] sell DBMS systems.
+\end{description}
+
+\subsubsection{DBMS Languages}
+\begin{description}
+  \item[DDL] ``Data Definition Language''. Used by DBA to define DB's logical, internal and external schema's. (stored in catalog)
+  \item[DML] ``Data Manipulation Language''. Used for CRUD, interactively or from another programming language.
+  \item[SQL] ``Structured Query Language''. Both a DDL AND DML for relational DB's.
+\end{description}
+
+\subsection{Advantages of Database Using Design}
+\begin{itemize}
+  \item data and functional independence: changes in data definitions have minimal impact on the applications using the data.
+  \item logical data independence: software apps are minimally impacted by changes in the conceptual schema. (e.g. new relationships)
+  \item functional independence: when a stored function's method changes, the sofware using this method still works.
+  \item DB modeling: data model = explicit representation of data concepts.
+  \item managin data redundancy: sometimes redundancy is useful and some DBMSes have built-in functionality to keep redundant data syncronised so that the redundancy doesn't lead to inconsistency.
+  \item specifying integrity rules: both \textbf{semantic} and \textbf{syntactical} rules can be stored in the catalog. This way they're always enforced, regardless from which application uses the data. These rules are called \textbf{integrity rules}.
+  \item concurrency control: most DBMSes have a system of \textbf{transactions}. These are a sequence of reads and writes that are executed as one atomic transaction. These transactions are \textbf{ACID} (Atomicicty, Consistency, Isolation, Durability).
+  \item data security: DBMSes allow for user level access control to enhance security. These authorization rules are stored in the catalog.
+  \item backup and recovery facilities: DBMSes have backup and restore functionality.
+  \item performance utilities: indices, distributed data storage, \dots
+\end{itemize}
